@@ -19,7 +19,7 @@ app.get("/" , function(req, res){
 	res.render("search");
 })
 
-app.get("/results" , async(req , res)=>{
+app.get("/results" , function(req , res){
 	var pinQuery = req.query.pincode;
 	// var city,state;
 // 	var cityUrl = "https://api.postalpincode.in/pincode/"+pinQuery;
