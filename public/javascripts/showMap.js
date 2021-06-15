@@ -25,3 +25,32 @@
 //             zoom: 8, // starting zoom
 //           });
 //         </script>
+
+
+
+//===================result route code to access coordinates using city, state accessed form pincode=======
+	// var city,state;
+// 	var cityUrl = "https://api.postalpincode.in/pincode/"+pinQuery;
+// 	request(cityUrl, async(error, response, body)=>{
+// 		var cities= JSON.parse(body);
+// 		console.log(cities[0].PostOffice[0].Block);
+// 		console.log(cities[0].PostOffice[0].State);
+// 		var city=cities[0].PostOffice[0].Block;
+// 		var state=cities[0].PostOffice[0].State;
+
+// 		// console.log(body);
+// 		var q = city+", "+ state;
+// 	console.log(q);
+// 	const geoData = await geocoder.forwardGeocode({
+// 		// query:'pathankot, punjab',
+// 		query:q,
+// 		limit: 1
+// 	}).send()
+// 	// console.log(geoData.body);
+// 	// console.log(query);
+// 	const geoCoordinates=geoData.body.features[0].geometry.coordinates;
+// // res.render("results", {geoCoordinates: geoCoordinates});
+// 	// console.log(geoData.body.features[0].geometry.coordinates);
+// 	console.log(geoCoordinates);
+// 	})
+	
