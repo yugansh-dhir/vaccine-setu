@@ -17,16 +17,10 @@ const centresLoc = require("./seeds/centres.json");
 
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", function (req, res) {
-  //   var data = JSON.parse(centresLoc);
-  //   fetch(centresLoc)
-  //     .then((centres) => centres.json())
-  //     .then(res.send);
-  // .then(res.send);
-  //   console.log(data);
   res.render("search");
-  //   res.send(data);
 });
 
 app.get("/results", function (req, res) {
@@ -55,7 +49,7 @@ app.get("/results", function (req, res) {
 });
 
 app.get("/covidUpdates", function (req, res) {
-  res.render("tempCovidUpdates");
+  res.render("temp");
 });
 
 app.get("/vaccineCentres", function (req, res) {
@@ -66,12 +60,16 @@ app.get("/vaccineUpdates", function (req, res) {
 });
 
 app.get("/alerts", function (req, res) {
-  res.render("alerts");
+  res.render("temp");
 });
 
-// app.all('*', (req, res, next) => {
-//     next(new ExpressError('Page Not Found', 404))
-// })
+app.get("/donate", function (req, res) {
+  res.render("temp");
+});
+
+app.get("*", function (req, res) {
+  res.redirect("/");
+});
 
 app.listen(process.env.PORT || 3000, process.env.IP, function () {
   console.log("Vaccine Availabity app is running now!");
