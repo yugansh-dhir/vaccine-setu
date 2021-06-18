@@ -71,6 +71,7 @@ app.get("*", function (req, res) {
   res.redirect("/");
 });
 
-app.listen(process.env.PORT || 3000, process.env.IP, function () {
-  console.log("Vaccine Availabity app is running now!");
+const port = process.env.PORT || 3000;
+app.listen(port, process.env.IP, function () {
+  console.log(`Vaccine Availabity app is running now on ${port}`);
 });
