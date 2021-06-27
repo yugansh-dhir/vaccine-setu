@@ -60,7 +60,7 @@ app.get("/vaccineUpdates", function (req, res) {
 });
 
 app.get("/alerts", function (req, res) {
-  res.render("temp");
+  res.render("alerts");
 });
 
 app.get("/donate", function (req, res) {
