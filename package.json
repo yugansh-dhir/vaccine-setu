@@ -4,7 +4,8 @@
   "description": "vaccine setu basic app",
   "main": "app.js",
   "scripts": {
-    "int-test": "mocha",
+    "test": "echo \"Error: no test specified\" && exit 1",
+  "int-test": "mocha --require babel-core/register --recursive test",
     "start": "node app.js"
   },
   "author": "yugansh dhir",
