@@ -4,7 +4,7 @@
   "description": "vaccine setu basic app",
   "main": "app.js",
   "scripts": {
-    "test": "mocha",
+    "int-test": "mocha",
     "start": "node app.js"
   },
   "author": "yugansh dhir",
