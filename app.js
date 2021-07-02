@@ -49,9 +49,10 @@ app.get("/alerts", function (req, res) {
   res.render("alerts");
 });
 
-// app.all('*', (req, res, next) => {
-//     next(new ExpressError('Page Not Found', 404))
-// })
+app.get("*", function (req, res) {
+  res.redirect("/");
+});
+
 
 app.listen(process.env.PORT || 3000, process.env.IP, function () {
   console.log("Vaccine Availabity app is running now!");
