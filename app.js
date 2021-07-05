@@ -2,6 +2,20 @@ const express = require("express");
 const path = require("path");
 const request = require("request");
 const ejsMate = require("ejs-mate");
+const mongoose = require('mongoose');
+const User= require('./models/user');
+
+mongoose.connect('mongodb://localhost:27017/vaccineSetuData', {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true
+});
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", () => {
+    console.log("Database connected");
+});
 
 const app = express();
 
@@ -45,8 +59,21 @@ app.get("/vaccineUpdates", function (req, res) {
   res.render("vaccineUpdates");
 });
 
+app.use(express.urlencoded({extended:true}));
+
 app.get("/alerts", function (req, res) {
   res.render("alerts");
+});
+
+app.post("/alerts",async(req, res)=>{
+  const{email, pincode}= req.body;
+  const user = new User({
+    email,
+    pincode
+  })
+  await user.save();
+  
+  res.send("You will start receiving alerts on "+ email + " for "+ pincode+ " shortly.");
 });
 
 app.get("*", function (req, res) {
