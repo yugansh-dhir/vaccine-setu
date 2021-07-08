@@ -38,24 +38,12 @@ const sessionConfig ={
 }
 
 app.use(session(sessionConfig));
-// app.use(session({
-//   secret: 'vaccinehaitohmumkinhai',
-//   resave: false,
-//   saveUninitialized: false,
-//   cookie: { secure: true }
-// }))
 
 app.use(flash());
 app.use((req, res, next)=>{
   res.locals.success= req.flash('success');
   next();
 });
-
-// app.configure(function() {
-//   app.use(express.cookieParser('keyboard cat'));
-//   app.use(express.session({ cookie: { maxAge: 60000 }}));
-//   app.use(flash());
-// });
 
 
 app.get("/", function (req, res) {
