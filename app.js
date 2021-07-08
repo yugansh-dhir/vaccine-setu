@@ -2,6 +2,10 @@ const express = require("express");
 const path = require("path");
 const request = require("request");
 const ejsMate = require("ejs-mate");
+const cookieParser= require('cookie-parser');
+const bodyParser= require('body-parser');
+const session = require("express-session");
+const flash =require("connect-flash");
 const mongoose = require('mongoose');
 const User= require('./models/user');
 
@@ -21,6 +25,38 @@ const app = express();
 
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
+
+const sessionConfig ={
+  secret: "vaccinehai",
+  resave:false,
+  saveUninitialized: true,
+  cookie:{
+    httpOnly:true,
+    expires: Date.now() +1000 * 60*60*24,
+    maxAge: 1000*60*60*24
+  }
+}
+
+app.use(session(sessionConfig));
+// app.use(session({
+//   secret: 'vaccinehaitohmumkinhai',
+//   resave: false,
+//   saveUninitialized: false,
+//   cookie: { secure: true }
+// }))
+
+app.use(flash());
+app.use((req, res, next)=>{
+  res.locals.success= req.flash('success');
+  next();
+});
+
+// app.configure(function() {
+//   app.use(express.cookieParser('keyboard cat'));
+//   app.use(express.session({ cookie: { maxAge: 60000 }}));
+//   app.use(flash());
+// });
+
 
 app.get("/", function (req, res) {
   res.render("search");
@@ -70,10 +106,12 @@ app.post("/alerts",async(req, res)=>{
   const user = new User({
     email,
     pincode
-  })
+  });
   await user.save();
-  
-  res.send("You will start receiving alerts on "+ email + " for "+ pincode+ " shortly.");
+  req.flash('success', 'You will start receiving alerts on your email shortly.');
+  // res.send("You will start receiving alerts on "+ email + " for "+ pincode+ " shortly.");
+res.redirect('/alerts');
+
 });
 
 app.get("*", function (req, res) {
