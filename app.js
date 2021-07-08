@@ -21,7 +21,18 @@ db.once("open", () => {
     console.log("Database connected");
 });
 
+const express = require("express");
+const path = require("path");
+const request = require("request");
+const ejsMate = require("ejs-mate");
+const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
+const { query } = require("express");
+const mapBoxToken = process.env.MAPBOX_TOKEN;
+const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 const app = express();
+const fetch = require("node-fetch");
+const fs = require("fs-extra");
+const centresLoc = require("./seeds/centres.json");
 
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
@@ -118,6 +129,9 @@ app.get("*", function (req, res) {
   res.redirect("/");
 });
 
+app.get("*", function (req, res) {
+  res.redirect("/");
+});
 
 app.listen(process.env.PORT || 3000, process.env.IP, function () {
   console.log("Vaccine Availabity app is running now!");
