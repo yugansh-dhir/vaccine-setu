@@ -4,6 +4,8 @@ const request = require("request");
 const ejsMate = require("ejs-mate");
 const mongoose = require('mongoose');
 const User= require('./models/user');
+const app = express();
+
 
 mongoose.connect('mongodb://localhost:27017/vaccineSetuData', {
     useNewUrlParser: true,
@@ -17,18 +19,17 @@ db.once("open", () => {
     console.log("Database connected");
 });
 
-const express = require("express");
-const path = require("path");
-const request = require("request");
-const ejsMate = require("ejs-mate");
-const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
-const { query } = require("express");
-const mapBoxToken = process.env.MAPBOX_TOKEN;
-const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
-const app = express();
-const fetch = require("node-fetch");
-const fs = require("fs-extra");
-const centresLoc = require("./seeds/centres.json");
+// const express = require("express");
+// const path = require("path");
+// const request = require("request");
+// const ejsMate = require("ejs-mate");
+// const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
+// const { query } = require("express");
+// const mapBoxToken = process.env.MAPBOX_TOKEN;
+// const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
+// const fetch = require("node-fetch");
+// const fs = require("fs-extra");
+// const centresLoc = require("./seeds/centres.json");
 
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
